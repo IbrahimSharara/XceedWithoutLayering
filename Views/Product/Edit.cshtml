@@ -1,0 +1,213 @@
+﻿@model EditProduct
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<!-- MAIN-CONTENT -->
+<div class="main-content app-content">
+    <div class="side-app">
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+            <!-- PAGE HEADER -->
+            <div class="page-header d-sm-flex d-block">
+                <ol class="breadcrumb breadcrumb-arrow mt-3">
+                    <li><a href="/dashboard/"><i class="fa fa-home"></i> Dashboard</a></li>
+                    <li><a asp-action="Index">Products </a></li>
+
+                    <li class="active"><span>@Model.Product.Name</span></li>
+                </ol>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-9 col-md-9">
+
+
+                    <form id="ProductFormEdit" class="form" action="/EditProduct" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa fa-gears"></i> Main Settings </h3>
+                                <input id="ProductID" name="Id" hidden class="form-control" value="@Model.Product.Id" type="text">
+
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Product Name </label>
+                                            <input id="Name" name="Name" class="form-control" required placeholder="Enter Name..." value="@Model.Product.Name" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Product Category </label>
+                                            <select class="form-control form-select select2" id="CategoryId" name="CategoryId" asp-for=" Product.CategoryId" required>
+                                                 @foreach (var item in Model.Categories)
+                                                {
+                                                <option value="@item.Id">@item.Name</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Start Date</label>
+                                            <input id="Name" class="form-control" required asp-for="Product.StartDate" name="StartDate" type="date">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Duration</label>
+                                            <input id="Name" class="form-control" required asp-for="Product.Duration" min="1" name="Duration" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input id="Name" class="form-control" required asp-for="Product.Price" min="1" name="Price" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Details</label>
+                                            <textarea required class="form-control " name="Details" rows="3" placeholder="" spellcheck="false">@Model.Product.Details</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+
+                                <div class="d-flex">
+                                    <div class="ms-auto">
+                                        <button id="btnProductEditSave" type="submit" class="btn btn-success btn-sm  saveProductInfo"> <i class="fa fa-check-square-o"></i> Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+           
+                @*Product Image*@
+                <div class="col-lg-3 col-md-3" id="mainphoto">
+                    <div class="card">
+                        <script>
+                            function previewFile(input) {
+                                if (input.files && input.files[0]) {
+                                    var ImageDir = new FileReader();
+                                    ImageDir.onload = function (e) {
+                                        $('#previewImg').attr('src', e.target.result);
+                                    }
+                                    ImageDir.readAsDataURL(input.files[0]);
+                                }
+                            }
+
+                        </script>
+
+                        <div class="card-header">
+                            <h3 class="card-title">Product Image </h3>
+                        </div>
+                        <div class="card-body">
+
+                            <form id="RoomMainPhoto" asp-action="ProductImage" method="post" enctype="multipart/form-data">
+                                
+                                <img id="previewImg" name="previewImg" class="card-img-top w-100 w-100" src="~/images/@Model.Product.Image" alt="">
+
+                                <input name="Id" id="txt_PropertyID" value="@Model.Product.Id" hidden />
+
+                                <span class="btn btn-success fileinput-button mr-1   btn-sm ">
+                                    <i class="fa fa-refresh"></i>
+                                    <span>Change Photo</span>
+                                    <input type="file" accept="image/*" onchange="previewFile(this);" required id="postedFiles" name="image">
+                                </span>
+
+                                <button type="submit" class="btn btn-secondary  mr-1   btn-sm ">
+                                    <i class="icon-cloud-upload"></i>
+                                    <span>Upload</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+
+                                <form class="form" id="formdeleteProduct" asp-action="Delete" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="text" hidden name="id" value="@Model.Product.Id" />
+                                    <div class="form-body">
+                                        <h4 class="form-section" style="border-bottom: 0 !important;"><i class="fa fa-trash"></i> Delete Product</h4>
+
+                                    </div>
+                                    <div class="form-actions">
+
+                                        <button type="submit" onclick="Validate(@Model.Product.Id, this, event, '@Model.Product.Name')" class="btn mb-1 btn-danger btn-icon btn-lg"><i class="fa fa-trash"></i> Delete This Product</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN-CONTENT -->
+<script src="~/CMS/assets/plugins/sweet-alert/jquery.sweet-alert.js"></script>
+<script src="~/CMS/assets/plugins/sweet-alert/sweetalert.min.js"></script>
+<script src="~/CMS/assets/js/sweet-alert.js"></script>
+<script type="text/javascript">
+
+    function validateData() {
+
+        return true;
+
+    }
+
+    function Validate(OrderNumber, ctl, event, Productinfo) {
+
+
+        event.preventDefault();
+
+
+        /*   "warning", "error", "success" "info".*/
+
+        swal({
+            title: "Product: " + Productinfo,
+            text: "Are you certain you want to delete this?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes Confirm delete",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    if (validateData() == true) {
+
+                        $("#formdeleteProduct").submit();
+
+
+                    }
+                }
+                else {
+                    swal("Cancelled", "You have Cancelled it!", "error");
+                }
+            });
+
+
+
+
+    }
+</script>

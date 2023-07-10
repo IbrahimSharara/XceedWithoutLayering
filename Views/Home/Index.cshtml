@@ -1,0 +1,118 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<section id="hero" class="d-flex justify-content-center align-items-center">
+    <div class="container position-relative" data-aos-delay="100">
+        <h1 class="logo me-auto">
+            Computer And Laptop
+            ,<br>Accessories
+        </h1>
+
+        <h2 style="width:40%">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</h2>
+        <a href="#trainers" class="btn-get-started">Get Started</a>
+    </div>
+</section><!-- End Hero -->
+<!-- ======= Trainers Section ======= -->
+<section id="trainers" class="trainers">
+    <div class="container">
+
+        <form asp-action="Get" asp-controller="Book" method="post">
+            <div class="row mb-4">
+                <div class="col-3">
+                    <input type="text" name="ProductName" class="form-control" placeholder="Product Name" id="ProductName" />
+                </div>
+                <div class="col-3">
+                    <select id="Category" name="Category" class="form-control">
+                        <option value="0">Category</option>
+                        @foreach (var item in Model.Categories)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+
+
+            </div>
+        </form>
+
+
+        <div class="row" id="Products">
+            @foreach (var item in Model.Products)
+            {
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                    <div class="member">
+                        <img src="/images/@item.Image" class="img-fluid" alt="">
+                        <div class="">
+                            <h4>@item.Name</h4>
+                            <span>@item.Category.Name</span>
+                            <p>
+                                @item.Details
+                            </p>
+                            <div class="social">
+                                <a href="/Product/details/@item.Id" class="get-started-btn">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+
+    </div>
+</section>
+<!-- End Trainers Section -->
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#Category").change(function () {
+                var CategoryID = $(this).val();
+                var ProductNameval = $('#ProductName').val();
+                debugger;
+                if (CategoryID == 0) {
+                    location.reload();
+                }
+                $.ajax(
+                    {
+                        type: "post",
+                        url: "/Category/ByCategory?name=" + ProductNameval + "&CategoryId=" + CategoryID,
+                        contentType: "html",
+                        success: function (response) {
+                            debugger;
+                            $("#Products").empty();
+                            $("#Products").append(response);
+                        }
+                    })
+            })
+
+        })</script>
+
+    <script>
+        $(document).ready(function () {
+            $('#ProductName').on('input', function () {
+                var inputValue = $(this).val();
+                var productid = $('#Products').val();
+                if (inputValue === '') {
+                    location.reload();
+                }
+                debugger;
+                $.ajax(
+                    {
+                        type: "post",
+                        url: "/Product/ProductName?name=" + inputValue + "&CategoryId=" + productid,
+                        contentType: "html",
+                        success: function (response) {
+                            debugger;
+                            $("#Products").empty();
+                            $("#Products").append(response);
+                        }
+                    })
+            });
+        })</script>
+}
+
+
+

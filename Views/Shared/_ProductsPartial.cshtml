@@ -1,0 +1,22 @@
+﻿@model List<Product>
+
+@foreach (var item in Model)
+{
+
+    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+        <div class="member">
+            <img src="/images/@item.Image" class="img-fluid" alt="">
+            <div class="">
+                <h4>@item.Name</h4>
+                @*<span>Web Development</span>*@
+                <p>
+                    @item.Details
+                </p>
+                <div class="social">
+                    <a href="/Product/details/@item.Id" class="get-started-btn">Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

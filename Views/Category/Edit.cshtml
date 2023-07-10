@@ -1,0 +1,61 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+<!-- MAIN-CONTENT -->
+<div class="main-content app-content">
+    <div class="side-app">
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+            <!-- PAGE HEADER -->
+            <div class="page-header d-sm-flex d-block">
+                <ol class="breadcrumb breadcrumb-arrow mt-3">
+                    <li><a href="/dashboard/"><i class="fa fa-home"></i> Dashboard</a></li>
+                    <li><a asp-action="Index">Categories </a></li>
+
+                    <li class="active"><span>@Model.Name</span></li>
+                </ol>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-9 col-md-9">
+
+
+                    <form id="ProductFormEdit" class="form" action="/EditCategory" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa fa-gears"></i> Main Settings </h3>
+                                <input id="ProductID" name="Id" hidden class="form-control" value="@Model.Id" type="text">
+
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Category Name </label>
+                                            <input id="Name" name="Name" class="form-control" required  disable placeholder="Enter Name..." value="@Model.Name" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+
+                                <div class="d-flex">
+                                    <div class="ms-auto">
+                                        <button id="btnProductEditSave" type="submit" class="btn btn-success btn-sm  saveProductInfo"> <i class="fa fa-check-square-o"></i> Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN-CONTENT -->

@@ -1,0 +1,284 @@
+﻿@*@using Library.BLL.Repositories;*@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- META DATA -->
+    <meta charset="UTF-8" />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+
+    <!-- TITLE -->
+    <title> Dashboard</title>
+
+    <!-- FAVICON -->
+    <!-- BOOTSTRAP CSS -->
+    <link id="style" href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link id="style" href="~/css/all.min.css" rel="stylesheet" />
+
+    <!-- STYLE CSS -->
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <!--- PLUGINS CSS -->
+    <link href="~/css/plugins.css" rel="stylesheet" />
+
+    <!--- ICONS CSS -->
+    <link href="~/css/icons.css" rel="stylesheet" />
+
+    <!--- ANIMATE CSS -->
+    <link href="~/css/animated.css" rel="stylesheet" />
+
+
+    <!-- INTERNAL SWITCHER CSS -->
+    <link href="~/css/switcher.css" rel="stylesheet" />
+    <link href="~/css/demo.css" rel="stylesheet" />
+
+    @RenderSection("datatable" , false)
+
+</head>
+<body class="app sidebar-mini ltr">
+    <!--GLOBAL LOADER -->
+    <div id="global-loader">
+        <img src="~/images/loader.svg" alt="loader" />
+    </div>
+    <!--- END GLOBAL LOADER -->
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+
+            <!-- APP-HEADER -->
+            <div class="app-header header sticky">
+                <div class="container-fluid main-container">
+                    <div class="d-flex">
+
+                        <!--End SEARCH -->
+                        <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                            <div class="dropdown d-none">
+                                <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
+                                    <i class="fe fe-search"></i>
+                                </a>
+                                <div class="dropdown-menu header-search dropdown-menu-start">
+                                    <div class="input-group w-100 p-2">
+                                        <input type="text" class="form-control" placeholder="Search...." />
+                                        <div class="input-group-text btn btn-primary">
+                                            <i class="fe fe-search" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- SEARCH -->
+                            <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon fe fe-more-vertical"></span>
+                            </button>
+                            <div class="navbar navbar-collapse responsive-navbar p-0">
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                                    <div class="d-flex order-lg-2">
+                                        <!-- Small screen Search -->
+                                        <div class="dropdown d-lg-none d-flex">
+                                            <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
+                                                <i class="fe fe-search"></i>
+                                            </a>
+                                            <div class="dropdown-menu header-search dropdown-menu-start">
+                                                <div class="input-group w-100 p-2">
+                                                    <input type="text" class="form-control" placeholder="Search...." />
+                                                    <div class="input-group-text btn btn-primary">
+                                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Small screen Search -->
+                                        <!-- Theme-Layout -->
+                                        <div class="d-flex country">
+                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                                                <span class="dark-layout mt-1"><i class="ri-moon-clear-line"></i></span>
+                                                <span class="light-layout mt-1"><i class="ri-sun-line"></i></span>
+                                            </a>
+                                        </div>
+                                        <!-- End Theme-Layout -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a href="/Account/SignOut" class="get-started-btn order-last">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <!-- END APP-HEADER -->
+            <!-- Side bar -->
+            <div class="sticky">
+                <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+                <div class="app-sidebar">
+                    <div class="side-header">
+                        <a class="header-brand1" href="/cms">
+                            <h1 class="logo me-auto"><a href="/home">Home Page</a></h1>
+                        </a>
+                    </div>
+                    <!-- End logo-->
+                    <div class="main-sidemenu">
+                        <div class="slide-left disabled" id="slide-left">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewbox="0 0 24 24">
+                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
+                            </svg>
+                        </div>
+                        <!-- Side bar Items-->
+                        <ul class="side-menu">
+                            <li class="sub-category">
+                                <h3>Main </h3>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="~/dashboard"><i class="fa fa-home"></i><span class="side-menu__label ms-1"> Dashboard </span></a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="~/product"><i class="fa-solid fa-book"></i><span class="side-menu__label ms-1"> Products </span></a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="~/category"><i class="fa-solid fa-circle-exclamation"></i><span class="side-menu__label ms-1"> Categories </span></a>
+                            </li>
+
+                        </ul>
+                        <!-- End Side bar Items-->
+                        <div class="slide-right" id="slide-right">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewbox="0 0 24 24">
+                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Side bar -->
+            @RenderBody()
+        </div>
+        <!-- FOOTER -->
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row align-items-center flex-row-reverse">
+                    <div class="col-lg-12 col-sm-12   text-center">
+
+                        <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2 container center-layout"><span class="float-md-left d-block d-md-inline-block">Copyright  &copy; @DateTime.Now.Year Products, All rights reserved. </span><span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Powered By <a href="https://Xceedcc.com" target="_blank">Xceedcc.com</a> </span></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- END FOOTER -->
+
+    </div>
+    <!-- END PAGE-->
+    <!-- BACK TO TOP -->
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+    <!-- JQUERY MIN JS -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+
+    <!-- BOOTSTRAP5 BUNDLE JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <!-- CIRCLE PROGRESS JS -->
+    <script src="~/js/circle-progress.min.js"></script>
+    <!-- SIDEMENU JS -->
+    <script src="~/js/sidemenu.js"></script>
+
+
+
+    <!-- PERFECT-SCROLLBAR JS  -->
+    <script src="~/cms/assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+    <script src="~/cms/assets/plugins/p-scroll/pscroll.js"></script>
+
+    <!-- CIRCLE PROGRESS JS -->
+    <script src="~/cms/assets/plugins/circle-progress/circle-progress.min.js"></script>
+
+    <!-- MOMENT JS -->
+    <script src="~/cms/assets/plugins/moment/moment.min.js"></script>
+
+    <!-- NEWS TICKER JS -->
+    <script src="~/cms/assets/plugins/newsticker/breaking-news-ticker.min.js"></script>
+    <script src="~/cms/assets/plugins/newsticker/newsticker.js"></script>
+
+    <!-- SIDEMENU JS -->
+    <script src="~/cms/assets/plugins/sidemenu/sidemenu.js"></script>
+
+    <!-- RIGHT SIDEBAR JS -->
+    <script src="~/cms/assets/plugins/sidebar/sidebar.js"></script>
+
+    <!-- SELECT2 JS -->
+    <script src="~/cms/assets/plugins/select2/select2.full.min.js"></script>
+
+    <!-- DATA TABLE JS -->
+    <script src="~/cms/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+    <script src="~/cms/assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/js/jszip.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/pdfmake/pdfmake.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/pdfmake/vfs_fonts.js"></script>
+    <script src="~/cms/assets/plugins/datatable/js/buttons.html5.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/js/buttons.print.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/js/buttons.colVis.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/dataTables.responsive.min.js"></script>
+    <script src="~/cms/assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
+    <script src="~/cms/assets/js/table-data.js"></script>
+
+
+    <!-- STICKY JS -->
+    <script src="~/cms/assets/js/sticky.js"></script>
+
+    <!-- COLOR THEME JS -->
+    <script src="~/cms/assets/js/themeColors.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="~/cms/assets/js/custom.js"></script>
+
+    <!-- SWITCHER-STYLES JS -->
+    <script src="~/cms/assets/js/switcher-styles.js"></script>
+
+    <!-- SWITCHER JS -->
+    <script src="~/cms/assets/switcher/js/switcher.js"></script>
+
+
+    <!-- MODAL JS -->
+    <script src="~/cms/assets/js/modal.js"></script>
+    <!-- STAR RATING JS -->
+    <script src="~/cms/assets/plugins/rating/jquery-rate-picker.js"></script>
+    <script src="~/cms/assets/plugins/rating/rating-picker.js"></script>
+
+    <!-- STAR RATING-1 JS -->
+    <script src="~/cms/assets/plugins/ratings-2/jquery.star-rating.js"></script>
+    <script src="~/cms/assets/plugins/ratings-2/star-rating.js"></script>
+
+
+
+    <!-- INTERNAL FILE-UPLOADS JS -->
+    <script src="~/cms/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
+    <script src="~/cms/assets/plugins/fancyuploder/jquery.fileupload.js"></script>
+    <script src="~/cms/assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+    <script src="~/cms/assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+    <script src="~/cms/assets/plugins/fancyuploder/fancy-uploader.js"></script>
+
+
+    <!-- FLATPICKER JS -->
+    <script src="~/cms/assets/plugins/flatpickr/flatpickr.js"></script>
+    <script src="~/cms/assets/js/flatpickr.js"></script>
+
+    <!-- DATEPICKER JS -->
+    <script src="~/cms/assets/plugins/spectrum-date-picker/spectrum.js"></script>
+    <script src="~/cms/assets/plugins/spectrum-date-picker/jquery-ui.js"></script>
+    <script src="~/cms/assets/plugins/input-mask/jquery.maskedinput.js"></script>
+
+
+
+
+
+    <!-- SCRIPTS CLOSED -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
+
