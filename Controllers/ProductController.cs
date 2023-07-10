@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProductCategory.InterFaces;
 using ProductCategory.Models;
 using ProductCategory.ViewModels;
+using System.Security.Cryptography;
 
 namespace ProductCategory.Controllers
 {
@@ -12,7 +13,7 @@ namespace ProductCategory.Controllers
         public ICategoryRepository Category { get; }
         public UserManager<ApplicationUser> _userManager { get; }
 
-        public ProductController(IProductRepository product, ICategoryRepository category , UserManager<ApplicationUser> user)
+        public ProductController(IProductRepository product, ICategoryRepository category, UserManager<ApplicationUser> user)
         {
             Product = product;
             Category = category;
@@ -21,11 +22,11 @@ namespace ProductCategory.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var product =await Product.GetByID(id);
+            var product = await Product.GetByID(id);
             return View(product);
         }
 
-            public IActionResult Index()
+        public IActionResult Index()
         {
             var model = new ForAllProducts
             {
@@ -35,15 +36,36 @@ namespace ProductCategory.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddNewProduct(Product tbl)
+        public IActionResult AddNewProduct()
         {
+            EditProduct model = new EditProduct
+            {
+                Categories = Category.GetAll(),
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNewProduct(Product tbl, IFormFile image)
+        {
+            var ishere = Product.GetProductByName(tbl.Name);
+            if(ishere.Count() > 0 )
+            {
+                ViewBag.ishere = "this product Hase been inserted before";
+                return View(new EditProduct { Product = tbl , Categories = Category.GetAll() });
+            }
             tbl.CreationDate = DateTime.Now;
             tbl.StartDate = DateTime.Now;
-            tbl.Details = "";
             string? userName = GetCurrentUserAsync().Result.UserName;
-            tbl.CreatedBy = userName?? "";
-            tbl.LastUpdatedBy = userName?? "";
+            tbl.CreatedBy = userName ?? "";
+            tbl.LastUpdatedBy = userName ?? "";
+            if (image != null)
+            {
+                string imageName = image.FileName;
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", imageName);
+                image.CopyTo(new FileStream(imagePath, FileMode.Create));
+                tbl.Image = imageName;
+            }
             await Product.Add(tbl);
             return Redirect("/EditProduct/" + tbl.Id);
         }
@@ -77,13 +99,13 @@ namespace ProductCategory.Controllers
             string? userName = GetCurrentUserAsync().Result.UserName;
             old.LastUpdatedBy = userName ?? "";
             await Product.Update(old);
-            return Redirect("/EditProduct/"+tbl.Id);
+            return Redirect("/EditProduct/" + tbl.Id);
         }
-        
-        public async Task<IActionResult> ProductImage(IFormFile image , int id)
+
+        public async Task<IActionResult> ProductImage(IFormFile image, int id)
         {
-            var old =await Product.GetByID(id);
-            if(image != null)
+            var old = await Product.GetByID(id);
+            if (image != null)
             {
                 string imageName = image.FileName;
                 string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", imageName);
@@ -93,21 +115,21 @@ namespace ProductCategory.Controllers
                 old.LastUpdatedBy = userName ?? "";
                 await Product.Update(old);
             }
-            
+
             return Redirect("/EditProduct/" + old.Id);
         }
 
-        public async Task<IActionResult> ProductName(string name , int CategoryId)
+        public async Task<IActionResult> ProductName(string name, int CategoryId)
         {
-            var products = Product.GetByName(name , CategoryId);
-            return PartialView("_ProductsPartial" , products);
+            var products = Product.GetByName(name, CategoryId);
+            return PartialView("_ProductsPartial", products);
         }
 
         #region Delete Brand
         [HttpPost]
         public async Task<ActionResult> Delete(int id)
         {
-            int done =await Product.Delete(id);
+            int done = await Product.Delete(id);
             return Redirect(nameof(Index));
 
 

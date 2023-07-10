@@ -14,8 +14,12 @@ namespace ProductCategory.Repositories
         public CategoryRepository(SystemContext dB) : base(dB)
         {
         }
+        public IEnumerable<Category> GetCategoryByName(string name)
+        {
+            return DB.Categories.Where(x => x.Name == name).ToList();
+        }
 
-        public IEnumerable<Product> GetProductByCategory(string name, int CategoryId)
+            public IEnumerable<Product> GetProductByCategory(string name, int CategoryId)
         {
             List<Product> Product = new List<Product>();
             if (!name.IsNullOrEmpty())

@@ -45,9 +45,9 @@
                                         <div class="form-group">
                                             <label>Product Category </label>
                                             <select class="form-control form-select select2" id="CategoryId" name="CategoryId" asp-for=" Product.CategoryId" required>
-                                                 @foreach (var item in Model.Categories)
+                                                @foreach (var item in Model.Categories)
                                                 {
-                                                <option value="@item.Id">@item.Name</option>
+                                                    <option value="@item.Id">@item.Name</option>
 
                                                 }
                                             </select>
@@ -56,7 +56,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Start Date</label>
-                                            <input id="Name" class="form-control" required asp-for="Product.StartDate" name="StartDate" type="date">
+                                            <input id="" min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" required asp-for="Product.StartDate" name="StartDate" type="date">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -91,7 +91,7 @@
                         </div>
                     </form>
                 </div>
-           
+
                 @*Product Image*@
                 <div class="col-lg-3 col-md-3" id="mainphoto">
                     <div class="card">
@@ -114,7 +114,7 @@
                         <div class="card-body">
 
                             <form id="RoomMainPhoto" asp-action="ProductImage" method="post" enctype="multipart/form-data">
-                                
+
                                 <img id="previewImg" name="previewImg" class="card-img-top w-100 w-100" src="~/images/@Model.Product.Image" alt="">
 
                                 <input name="Id" id="txt_PropertyID" value="@Model.Product.Id" hidden />
@@ -211,3 +211,4 @@
 
     }
 </script>
+

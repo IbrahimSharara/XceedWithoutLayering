@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductCategory.InterFaces;
 using ProductCategory.Models;
+using ProductCategory.ViewModels;
 
 namespace ProductCategory.Controllers
 {
@@ -19,9 +20,20 @@ namespace ProductCategory.Controllers
             return View(model);
         }
 
+        public IActionResult AddNewCategory()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddNewCategory(Category tbl)
         {
+            var ishere = Category.GetCategoryByName(tbl.Name);
+            if (ishere.Count() > 0)
+            {
+                ViewBag.ishere = "this Category Hase been inserted before";
+                return View(tbl);
+            }
             await Category.Add(tbl);
             return Redirect("/EditCategory/" + tbl.Id);
         }

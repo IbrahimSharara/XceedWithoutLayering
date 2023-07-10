@@ -7573,6 +7573,10 @@
       "PackagePath": "staticwebassets\\fontawesome-iconpicker\\js\\fontawesome-iconpicker.min.js"
     },
     {
+      "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\009-driver-6.png",
+      "PackagePath": "staticwebassets\\images\\009-driver-6.png"
+    },
+    {
       "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\_120_2.jpg",
       "PackagePath": "staticwebassets\\images\\_120_2.jpg"
     },
@@ -7593,8 +7597,32 @@
       "PackagePath": "staticwebassets\\images\\_3321__18551_270_1.jpg"
     },
     {
+      "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\_7567__18551_270_1.jpg",
+      "PackagePath": "staticwebassets\\images\\_7567__18551_270_1.jpg"
+    },
+    {
+      "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\_8260__7503_1480_bansssner.jpg",
+      "PackagePath": "staticwebassets\\images\\_8260__7503_1480_bansssner.jpg"
+    },
+    {
+      "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\_9381_Aboutus.png",
+      "PackagePath": "staticwebassets\\images\\_9381_Aboutus.png"
+    },
+    {
+      "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\_9969__18551_270_1.jpg",
+      "PackagePath": "staticwebassets\\images\\_9969__18551_270_1.jpg"
+    },
+    {
+      "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\about1.jpg",
+      "PackagePath": "staticwebassets\\images\\about1.jpg"
+    },
+    {
       "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\loader.svg",
       "PackagePath": "staticwebassets\\images\\loader.svg"
+    },
+    {
+      "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\images\\services-Affordable-Fleet-Management.jpg",
+      "PackagePath": "staticwebassets\\images\\services-Affordable-Fleet-Management.jpg"
     },
     {
       "Id": "C:\\Works\\Projects\\ProductCategory\\wwwroot\\js\\aos.js",

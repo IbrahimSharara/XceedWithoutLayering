@@ -1,0 +1,125 @@
+﻿@model EditProduct
+@{
+    ViewData["Title"] = "AddNewProduct";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<!-- MAIN-CONTENT -->
+<div class="main-content app-content">
+    <div class="side-app">
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+            <!-- PAGE HEADER -->
+            <div class="page-header d-sm-flex d-block">
+                <ol class="breadcrumb breadcrumb-arrow mt-3">
+                    <li><a href="/dashboard/"><i class="fa fa-home"></i> Dashboard</a></li>
+                    <li><a asp-action="Index">Products </a></li>
+                </ol>
+
+            </div>
+
+            <div class="row">
+                <form id="ProductFormEdit" class="form row" asp-action="AddNewProduct" method="post" enctype="multipart/form-data">
+                    <div class="col-lg-9 col-md-9">
+                        @Html.AntiForgeryToken()
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa fa-gears"></i> Main Settings </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="card">
+                                    <script>
+                                        function previewFile(input) {
+                                            if (input.files && input.files[0]) {
+                                                var ImageDir = new FileReader();
+                                                ImageDir.onload = function (e) {
+                                                    $('#previewImg').attr('src', e.target.result);
+                                                }
+                                                ImageDir.readAsDataURL(input.files[0]);
+                                            }
+                                        }
+
+                                    </script>
+
+                                    <div class="card-header">
+                                        <h3 class="card-title">Product Image </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <img id="previewImg" name="previewImg" class="card-img-top w-100 w-100" alt="">
+                                        <span class="btn btn-success fileinput-button mr-1   btn-sm ">
+                                            <i class="fa fa-refresh"></i>
+                                            <span>Choose Photo</span>
+                                            <input type="file" accept="image/*" onchange="previewFile(this);" required id="postedFiles" name="image">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Product Name </label>
+                                            <input id="Name" name="Name" class="form-control" required placeholder="Enter Name..." type="text" asp-for="Product.Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Product Category </label>
+                                            <select class="form-control form-select select2" id="CategoryId" name="CategoryId" asp-for=" Product.CategoryId" required>
+                                                <option value="1">Select Category</option>
+                                                @foreach (var item in Model.Categories)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Start Date</label>
+                                            <input id="" min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" required asp-for="Product.StartDate" name="StartDate" type="date">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Duration</label>
+                                            <input id="Name" class="form-control" required asp-for="Product.Duration" min="1" name="Duration" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input id="Name" class="form-control" required asp-for="Product.Price" min="1" name="Price" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Details</label>
+                                            <textarea required class="form-control " name="Details" rows="3" placeholder="" asp-for="Product.Details" spellcheck="false"></textarea>
+                                        </div>
+                                    </div>
+                                    <h3 class="card-title text-danger"> @ViewBag.ishere </h3>
+
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+
+                                <div class="d-flex">
+                                    <div class="ms-auto">
+                                        <button id="btnProductEditSave" type="submit" class="btn btn-success btn-sm  saveProductInfo"> <i class="fa fa-check-square-o"></i> Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*Product Image*@
+                    <div class="col-lg-3 col-md-3" id="mainphoto">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN-CONTENT -->

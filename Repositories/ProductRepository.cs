@@ -10,6 +10,10 @@ namespace ProductCategory.Repositories
         {
         }
 
+        public IEnumerable<Product> GetProductByName(string name)
+        {
+            return DB.Products.Where(x => x.Name == name).ToList();
+        }
         public IEnumerable<Product> GetByName(string name, int CategoryId)
         {
             List<Product> Product = new List<Product>();
@@ -21,6 +25,7 @@ namespace ProductCategory.Repositories
                  Product = DB.Products.Where(x => x.Name.StartsWith(name) ).ToList();
             return Product;
         }
+
 
         public IEnumerable<Product> ProductsWithCategory()
         {

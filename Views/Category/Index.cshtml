@@ -25,10 +25,11 @@
                 
                 <div class="ms-auto">
                     <div>
-                        <a href="javascript:void(0);" class="btn bg-warning-transparent text-warning btn-sm" data-bs-target="#exampleModal3" data-bs-toggle="modal" title="Add New Category" data-bs-placement="bottom" data-bs-original-title="Add New">
+                        <a asp-action="AddNewCategory" class="btn bg-warning-transparent text-warning btn-sm"  title="Add New Category" data-bs-placement="bottom" data-bs-original-title="Add New">
                             <span>
                                 <i class="fa fa-plus"></i>
                             </span>
+                            Add New Category
                         </a>
 
                     </div>
@@ -83,34 +84,7 @@
     </div>
 </div>
 
-<!-- MESSAGE MODAL -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form asp-action="AddNewCategory" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="example-Modal3">Add Category </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="recipient-name" class="form-control-label">Name: </label>
-                        <input type="text" class="form-control" id="Name" name="Name" required />
-                    </div>
 
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary br-7" data-bs-dismiss="modal">Close </button>
-
-                    <input id="Submit1" type="submit" class="btn btn-primary br-7" value="Save" />
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- END MODAL -->
 @section Scripts
     {
     <script src="~/lib/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
