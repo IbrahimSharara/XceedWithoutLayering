@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProductCategory.ViewModels
 {
-    public class ForAllProducts
+    public class ForAllProductsAndCategories
     {
         public IEnumerable<Product> Products { get; set; }
         public IEnumerable<Category> Categories { get; set; }

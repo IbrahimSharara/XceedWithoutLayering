@@ -28,7 +28,7 @@ namespace ProductCategory.Controllers
 
         public IActionResult Index()
         {
-            var model = new ForAllProducts
+            var model = new ForAllProductsAndCategories
             {
                 Products = Product.ProductsWithCategory(),
                 Categories = Category.GetAll()
